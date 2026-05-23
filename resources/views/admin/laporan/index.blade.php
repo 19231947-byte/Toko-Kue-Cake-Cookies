@@ -36,9 +36,13 @@
         
         <div style="display: flex; align-items: center; gap: 15px;">
             @if(count($laporans) > 0)
-            <a href="{{ route('admin.laporan.export-pdf', ['start_date' => $startDate, 'end_date' => $endDate]) }}" target="_blank" class="btn btn-danger" style="padding: 10px 20px; border-radius: 10px; font-weight: 700; background: #dc2626; color: #fff;">
-                <i class="fa-solid fa-file-pdf"></i> Export PDF
-            </a>
+                <a href="{{ route('admin.laporan.export-pdf', ['start_date' => $startDate, 'end_date' => $endDate]) }}" target="_blank" class="btn btn-danger" style="padding: 10px 20px; border-radius: 10px; font-weight: 700; background: #dc2626; color: #fff;">
+                    <i class="fa-solid fa-file-pdf"></i> Export PDF
+                </a>
+            @else
+                <button class="btn btn-secondary" disabled style="padding: 10px 20px; border-radius: 10px; font-weight: 700; cursor: not-allowed; opacity: 0.6;">
+                    <i class="fa-solid fa-file-pdf"></i> Export PDF
+                </button>
             @endif
 
             <div style="background: #fdf6f0; padding: 10px 20px; border-radius: 12px; border: 1px solid #f5ede6; display: flex; flex-direction: column; align-items: flex-end;">
