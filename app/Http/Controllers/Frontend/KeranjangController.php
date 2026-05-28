@@ -31,10 +31,24 @@ class KeranjangController extends Controller
 
     public function tambah(Request $request, $id)
     {
-        $produk   = Produk::findOrFail($id);
-        $qty      = max(1, (int) $request->input('qty', 1));
+        $produk   = Produk::with('kategori')->findOrFail($id);
+        $qty      = (int) $request->input('qty', 1);
         $varianId = $request->input('varian_id') ?: null;
 
+        // Validasi minimal pembelian Snack Box
+        if ($produk->kategori && $produk->kategori->nama_kategori === 'Snack Box') {
+            if ($qty < 20) {
+                if ($request->ajax() || $request->wantsJson()) {
+                    return response()->json([
+                        'success' => false,
+                        'error'   => 'Minimal pemesanan Snack Box adalah 20 pcs.',
+                    ], 422);
+                }
+                return redirect()->back()->with('error', 'Minimal pemesanan Snack Box adalah 20 pcs.');
+            }
+        }
+
+        $qty = max(1, $qty);
         $harga      = $produk->harga;
         $namaVarian = null;
 
@@ -98,11 +112,19 @@ class KeranjangController extends Controller
     public function update(Request $request, $key)
     {
         [$produkId, $varianId] = $this->parseKey($key);
+        $qty = (int) $request->input('qty', 1);
+
+        $produk = Produk::with('kategori')->find($produkId);
+        if ($produk && $produk->kategori && $produk->kategori->nama_kategori === 'Snack Box') {
+            if ($qty < 20) {
+                return redirect()->back()->with('error', 'Minimal pemesanan Snack Box adalah 20 pcs.');
+            }
+        }
 
         Keranjang::where('user_id', $this->userId())
             ->where('produk_id', $produkId)
             ->where('varian_id', $varianId)
-            ->update(['qty' => max(1, (int) $request->input('qty', 1))]);
+            ->update(['qty' => max(1, $qty)]);
 
         return redirect()->back()->with('success', 'Keranjang diperbarui.');
     }

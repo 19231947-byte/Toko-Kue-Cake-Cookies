@@ -167,11 +167,20 @@
 
                 {{-- Qty --}}
                 <label style="font-weight:600;font-size:.88rem;color:#2C1A0E;margin-bottom:8px;display:block;">Jumlah:</label>
-                <div class="qty-wrap mb-4">
+                <div class="qty-wrap mb-2">
                     <button type="button" class="qty-btn" onclick="changeQty(-1)">−</button>
-                    <input type="number" id="qty" class="qty-input" value="1" min="1" max="99">
+                    <input type="number" id="qty" class="qty-input" 
+                           value="{{ ($produk->kategori && $produk->kategori->nama_kategori === 'Snack Box') ? 20 : 1 }}" 
+                           min="{{ ($produk->kategori && $produk->kategori->nama_kategori === 'Snack Box') ? 20 : 1 }}" 
+                           max="999">
                     <button type="button" class="qty-btn" onclick="changeQty(1)">+</button>
                 </div>
+
+                @if($produk->kategori && $produk->kategori->nama_kategori === 'Snack Box')
+                    <p id="min-order-info" style="font-size: .82rem; color: #dc3545; font-weight: 600; margin-bottom: 20px;">
+                        <i class="fa fa-info-circle me-1"></i> Minimal pemesanan 20 pcs (Pre Order)
+                    </p>
+                @endif
 
                 {{-- Total Harga --}}
                 <div style="margin-bottom:16px;">
@@ -238,12 +247,26 @@
     const namaProduk = "{{ addslashes($produk->nama_produk) }}";
     const urlKeranjang = "{{ route('keranjang.index') }}";
     const urlCheckout  = "{{ route('checkout.index') }}";
+    const isSnackBox   = "{{ ($produk->kategori && $produk->kategori->nama_kategori === 'Snack Box') ? '1' : '0' }}" === '1';
+    const minQty       = isSnackBox ? 20 : 1;
 
     function updateTotal() {
-        const qty   = parseInt(document.getElementById('qty').value) || 1;
+        const qtyInput = document.getElementById('qty');
+        let qty = parseInt(qtyInput.value) || 0;
+        
+        // Validasi input manual agar tidak kurang dari minimum
+        if (qty < minQty) {
+            qty = minQty;
+            qtyInput.value = minQty;
+        }
+
         const total = currentHarga * qty;
         document.getElementById('total-harga').textContent =
             'Rp ' + total.toLocaleString('id-ID');
+        
+        // Update hidden input qty
+        const hidden = document.getElementById('input-qty');
+        if (hidden) hidden.value = qty;
     }
 
     // Pilih varian
@@ -284,22 +307,38 @@
     // Qty
     function changeQty(delta) {
         const input = document.getElementById('qty');
-        const val   = Math.max(1, Math.min(99, parseInt(input.value || 1) + delta));
-        input.value = val;
-        const hidden = document.getElementById('input-qty');
-        if (hidden) hidden.value = val;
+        let val = parseInt(input.value || 0) + delta;
+        
+        // Minimal pembelian
+        if (val < minQty) {
+            val = minQty;
+            if (isSnackBox) {
+                alert('Minimal pemesanan Snack Box adalah 20 pcs.');
+            }
+        }
+        
+        input.value = Math.min(999, val);
         updateTotal();
     }
 
-    document.getElementById('qty').addEventListener('input', function() {
-        const hidden = document.getElementById('input-qty');
-        if (hidden) hidden.value = this.value;
+    document.getElementById('qty').addEventListener('change', function() {
+        updateTotal();
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
         updateTotal();
     });
 
     // Tambah ke keranjang via AJAX
     function tambahKeKeranjang() {
-        const qty      = document.getElementById('input-qty').value;
+        const qty = parseInt(document.getElementById('qty').value) || 0;
+        
+        // Validasi lagi sebelum kirim
+        if (isSnackBox && qty < 20) {
+            alert('Minimal pemesanan Snack Box adalah 20 pcs.');
+            return;
+        }
+
         const varianEl = document.getElementById('input-varian-id');
         const varianId = varianEl ? varianEl.value : null;
 
@@ -316,9 +355,13 @@
                     // Update badge keranjang di navbar
                     const badges = document.querySelectorAll('.badge.rounded-pill');
                     badges.forEach(b => b.textContent = data.totalItem);
+                } else if (data.error) {
+                    alert(data.error);
                 }
             })
-            .catch(() => tampilPopupKeranjang(null));
+            .catch(() => {
+                // Handle error
+            });
     }
 
     function tampilPopupKeranjang(data) {
