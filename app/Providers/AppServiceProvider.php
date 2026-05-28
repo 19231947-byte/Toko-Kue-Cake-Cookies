@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,8 +32,13 @@ class AppServiceProvider extends ServiceProvider
             URL::forceRootUrl(env('ASSET_URL'));
         }
 
-        // Otomatis buat admin jika belum ada (Khusus untuk hosting)
+        // Otomatis jalankan migrasi dan buat admin (Khusus untuk hosting)
         try {
+            // Jalankan migrasi jika tabel users belum ada
+            if (!Schema::hasTable('users')) {
+                Artisan::call('migrate', ['--force' => true]);
+            }
+
             if (User::where('role', 'admin')->count() === 0) {
                 User::create([
                     'name'     => 'Admin Ayasha',
