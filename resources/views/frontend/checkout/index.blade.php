@@ -278,7 +278,7 @@
                         <div id="custom-cake-section"
                              style="background:#fff8f0;border:1.5px solid #f5c97a;border-radius:12px;padding:20px 22px;margin-bottom:20px;">
                             <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-                                <span style="font-size:1.3rem;">🎂</span>
+                                <i class="fa-solid fa-cake-candles" style="color:#8B5E3C;font-size:1.2rem;"></i>
                                 <span style="font-family:'Playfair Display',serif;font-weight:700;color:#2C1A0E;font-size:1rem;">
                                     Detail Custom Cake
                                 </span>
@@ -293,7 +293,7 @@
                                     Tulisan & Ucapan di Kue <span style="color:#dc2626;">*</span>
                                 </label>
                                 <input type="text" id="tulisan_kue" class="form-control"
-                                       placeholder="Contoh: Happy Birthday Budi! 🎉"
+                                       placeholder="Contoh: Happy Birthday Budi!"
                                        maxlength="60">
                                 <div class="invalid-feedback">Tulisan/ucapan di kue wajib diisi.</div>
                                 <div style="font-size:.72rem;color:#9ca3af;margin-top:4px;">Maks. 60 karakter</div>
@@ -497,11 +497,11 @@
         pesan += '\n\n*Pesanan:*' + daftarProduk;
         pesan += '\n\n*Total: ' + formatRupiah(totalHarga) + '*';
         if (hasBirthdayCake) {
-            pesan += '\n\n🎂 *Detail Custom Cake:*';
+            pesan += '\n\n*Detail Custom Cake:*';
             pesan += '\n*Tulisan/Ucapan:* ' + tulisanVal;
             if (catatanCustomVal) pesan += '\n*Catatan Custom:* ' + catatanCustomVal;
         }
-        pesan += '\n\nMohon konfirmasi pesanan saya. Terima kasih 🙏';
+        pesan += '\n\nMohon konfirmasi pesanan saya. Terima kasih.';
 
         const url = 'https://wa.me/6285717628133?text=' + encodeURIComponent(pesan);
 

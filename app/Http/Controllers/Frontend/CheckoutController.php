@@ -20,20 +20,20 @@ class CheckoutController extends Controller
 
     private function getKeranjang(): array
     {
-        return Keranjang::where('user_id', $this->userId())->get()
+        return Keranjang::where('user_id', $this->userId())->with('produk.kategori')->get()
             ->mapWithKeys(function ($item) {
                 $key = $item->varian_id
                     ? "{$item->produk_id}_v{$item->varian_id}"
                     : (string) $item->produk_id;
 
                 return [$key => [
-                    'id'          => $item->produk_id,
-                    'nama'        => $item->nama_produk,
-                    'nama_varian' => $item->nama_varian,
-                    'harga'       => $item->harga,
-                    'gambar'      => $item->gambar,
-                    'qty'         => $item->qty,
-                    'kategori_id' => $item->produk?->kategori_id,
+                    'id'            => $item->produk_id,
+                    'nama'          => $item->nama_produk,
+                    'nama_varian'   => $item->nama_varian,
+                    'harga'         => $item->harga,
+                    'gambar'        => $item->gambar,
+                    'qty'           => $item->qty,
+                    'nama_kategori' => $item->produk?->kategori?->nama_kategori,
                 ]];
             })->toArray();
     }
@@ -47,7 +47,7 @@ class CheckoutController extends Controller
         }
 
         $total           = collect($keranjang)->sum(fn($i) => $i['harga'] * $i['qty']);
-        $hasBirthdayCake = collect($keranjang)->contains(fn($i) => ($i['kategori_id'] ?? null) == 3);
+        $hasBirthdayCake = collect($keranjang)->contains(fn($i) => ($i['nama_kategori'] ?? '') === 'Birthday Cakes');
 
         return view('frontend.checkout.index', compact('keranjang', 'total', 'hasBirthdayCake'));
     }

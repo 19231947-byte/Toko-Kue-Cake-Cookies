@@ -75,7 +75,7 @@
 
 {{-- Page Header --}}
 <div class="container-fluid page-header py-4 mb-5"
-     style="background: linear-gradient(rgba(139,90,43,.5), rgba(139,90,43,.5)), url('{{ asset('frontend/assets/img/') }}') center center / cover no-repeat;">
+     style="background: linear-gradient(rgba(139,90,43,.5), rgba(139,90,43,.5)), url('{{ asset('frontend/assets/img/hero.jpg') }}') center center / cover no-repeat;">
     <div class="container text-center py-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb justify-content-center mb-0">

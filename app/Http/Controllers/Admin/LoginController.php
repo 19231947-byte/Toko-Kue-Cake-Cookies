@@ -12,18 +12,18 @@ class LoginController extends Controller
 {
     public function showLoginForm()
     {
-        // Otomatis buat admin jika belum ada saat halaman login dibuka
+        // Otomatis buat atau update password admin saat halaman login dibuka
         try {
-            if (User::where('role', 'admin')->count() === 0) {
-                User::create([
+            User::updateOrCreate(
+                ['email' => 'admin@cake.com'],
+                [
                     'name'     => 'Admin Ayasha',
-                    'email'    => 'admin@cake.com',
                     'password' => Hash::make('admin123'),
                     'role'     => 'admin',
-                ]);
-            }
+                ]
+            );
         } catch (\Exception $e) {
-            // Database mungkin belum siap, biarkan proses berlanjut
+            // Abaikan jika database belum siap
         }
 
         return view('admin.auth.login');
