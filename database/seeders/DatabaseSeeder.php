@@ -30,7 +30,8 @@ class DatabaseSeeder extends Seeder
 
         // ── Helper: buat produk + varian ──────────────────────────────────────
         $buatProduk = function (array $data, array $varians = []) {
-            $produk = Produk::firstOrCreate(
+            // Gunakan updateOrCreate agar data gambar di database diperbarui sesuai seeder
+            $produk = Produk::updateOrCreate(
                 ['nama_produk' => $data['nama_produk']],
                 $data
             );
