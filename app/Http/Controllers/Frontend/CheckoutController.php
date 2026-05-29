@@ -65,7 +65,7 @@ class CheckoutController extends Controller
             return response()->json(['error' => 'Keranjang kosong.'], 422);
         }
 
-        $hasBirthdayCake = collect($keranjang)->contains(fn($i) => ($i['kategori_id'] ?? null) == 3);
+        $hasBirthdayCake = collect($keranjang)->contains(fn($i) => ($i['nama_kategori'] ?? '') === 'Birthday Cakes');
 
         $rules = [
             'nama'              => ['required', 'string', 'max:255'],
