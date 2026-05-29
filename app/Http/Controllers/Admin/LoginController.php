@@ -14,16 +14,22 @@ class LoginController extends Controller
     {
         // Otomatis buat atau update password admin saat halaman login dibuka
         try {
-            User::updateOrCreate(
-                ['email' => 'admin@cake.com'],
-                [
+            $user = User::where('email', 'admin@cake.com')->first();
+            if (!$user) {
+                User::create([
                     'name'     => 'Admin Ayasha',
-                    'password' => Hash::make('admin123'),
+                    'email'    => 'admin@cake.com',
+                    'password' => 'admin123', // Akan di-hash otomatis oleh model User
                     'role'     => 'admin',
-                ]
-            );
+                ]);
+            } else {
+                $user->update([
+                    'password' => 'admin123', // Reset password jika sudah ada
+                    'role'     => 'admin',
+                ]);
+            }
         } catch (\Exception $e) {
-            // Abaikan jika database belum siap
+            // Abaikan
         }
 
         return view('admin.auth.login');

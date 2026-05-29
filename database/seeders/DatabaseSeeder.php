@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             ['email' => 'admin@cake.com'],
             [
                 'name'     => 'Admin Ayasha',
-                'password' => bcrypt('admin123'),
+                'password' => 'admin123', // Hashing otomatis oleh model User
                 'role'     => 'admin',
             ]
         );
