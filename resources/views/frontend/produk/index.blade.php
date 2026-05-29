@@ -55,8 +55,13 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="store-item position-relative text-center">
                                 @if($produk->gambar)
-                                    <img class="img-fluid w-100" src="{{ asset('storage/' . $produk->gambar) }}"
-                                         onerror="this.onerror=null;this.src='{{ asset('frontend/assets/img/' . str_replace(' ', '', $produk->gambar)) }}';"
+                                    @php
+                                        $imagePath = str_contains($produk->gambar, 'produk/') 
+                                            ? asset('storage/' . $produk->gambar) 
+                                            : asset('frontend/assets/img/' . $produk->gambar);
+                                    @endphp
+                                    <img class="img-fluid w-100" src="{{ $imagePath }}"
+                                         onerror="this.onerror=null;this.src='{{ asset('frontend/assets/img/no-image.png') }}';"
                                          alt="{{ $produk->nama_produk }}" style="height:220px;object-fit:cover;">
                                 @else
                                     <div class="d-flex align-items-center justify-content-center bg-light"

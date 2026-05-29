@@ -34,8 +34,13 @@
             <td>{{ $index + 1 }}</td>
             <td>
                 @if($produk->gambar)
-                    <img src="{{ asset('storage/' . $produk->gambar) }}" 
-                         onerror="this.onerror=null;this.src='{{ asset('frontend/assets/img/' . str_replace(' ', '', $produk->gambar)) }}';"
+                    @php
+                        $imagePath = str_contains($produk->gambar, 'produk/') 
+                            ? asset('storage/' . $produk->gambar) 
+                            : asset('frontend/assets/img/' . $produk->gambar);
+                    @endphp
+                    <img src="{{ $imagePath }}" 
+                         onerror="this.onerror=null;this.src='{{ asset('frontend/assets/img/no-image.png') }}';"
                          style="width:55px;height:55px;object-fit:cover;border-radius:8px;"
                          alt="{{ $produk->nama_produk }}">
                 @else

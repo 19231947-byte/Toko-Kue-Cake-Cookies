@@ -50,8 +50,13 @@
         <div class="field">
             <label>Gambar Produk</label>
             @if($produk->gambar)
+                @php
+                    $imagePath = str_contains($produk->gambar, 'produk/') 
+                        ? asset('storage/' . $produk->gambar) 
+                        : asset('frontend/assets/img/' . $produk->gambar);
+                @endphp
                 <div style="margin-bottom:8px;">
-                    <img src="{{ asset('storage/' . $produk->gambar) }}"
+                    <img src="{{ $imagePath }}"
                          style="max-width:120px;border-radius:8px;border:1px solid #e5e7eb;">
                     <div style="font-size:0.75rem;color:#6b7280;margin-top:4px;">Gambar saat ini</div>
                 </div>

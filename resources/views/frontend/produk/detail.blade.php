@@ -96,8 +96,13 @@
             {{-- Gambar --}}
             <div class="col-lg-5">
                 @if($produk->gambar)
-                    <img class="detail-img" src="{{ asset('storage/' . $produk->gambar) }}" 
-                         onerror="this.onerror=null;this.src='{{ asset('frontend/assets/img/' . str_replace(' ', '', $produk->gambar)) }}';"
+                    @php
+                        $imagePath = str_contains($produk->gambar, 'produk/') 
+                            ? asset('storage/' . $produk->gambar) 
+                            : asset('frontend/assets/img/' . $produk->gambar);
+                    @endphp
+                    <img class="detail-img" src="{{ $imagePath }}" 
+                         onerror="this.onerror=null;this.src='{{ asset('frontend/assets/img/no-image.png') }}';"
                          alt="{{ $produk->nama_produk }}">
                 @else
                     <div class="img-placeholder">
