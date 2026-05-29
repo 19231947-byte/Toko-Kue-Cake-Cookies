@@ -36,7 +36,8 @@
                 @if($produk->gambar)
                     <img src="{{ asset('storage/' . $produk->gambar) }}" 
                          onerror="this.onerror=null;this.src='{{ asset('frontend/assets/img/' . $produk->gambar) }}';"
-                         style="width:55px;height:55px;object-fit:cover;border-radius:8px;">
+                         style="width:55px;height:55px;object-fit:cover;border-radius:8px;"
+                         alt="{{ $produk->nama_produk }}">
                 @else
                     <span style="font-size:12px;color:#999;">-</span>
                 @endif
