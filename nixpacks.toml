@@ -1,6 +1,6 @@
 # nixpacks.toml
 [phases.setup]
-nixPkgs = ["php81", "php81Packages.composer", "nodejs_18"]
+nixPkgs = ["php82", "php82Packages.composer", "nodejs_18"]
 
 [phases.install]
 cmds = ["composer install --no-interaction --no-dev --optimize-autoloader", "npm install"]
@@ -9,4 +9,4 @@ cmds = ["composer install --no-interaction --no-dev --optimize-autoloader", "npm
 cmds = ["npm run build", "php artisan storage:link", "php artisan optimize"]
 
 [start]
-cmd = "php artisan serve --host=0.0.0.0 --port=$PORT"
+cmd = "php artisan migrate --force && php artisan db:seed --force && php artisan serve --host=0.0.0.0 --port=$PORT"
