@@ -35,7 +35,7 @@
             <td>
                 @if($produk->gambar)
                     <img src="{{ asset('storage/' . $produk->gambar) }}" 
-                         onerror="this.onerror=null;this.src='{{ asset('frontend/assets/img/' . $produk->gambar) }}';"
+                         onerror="this.onerror=null;this.src='{{ asset('frontend/assets/img/' . str_replace(' ', '', $produk->gambar)) }}';"
                          style="width:55px;height:55px;object-fit:cover;border-radius:8px;"
                          alt="{{ $produk->nama_produk }}">
                 @else

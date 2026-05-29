@@ -56,7 +56,7 @@
                             <div class="store-item position-relative text-center">
                                 @if($produk->gambar)
                                     <img class="img-fluid w-100" src="{{ asset('storage/' . $produk->gambar) }}"
-                                         onerror="this.onerror=null;this.src='{{ asset('frontend/assets/img/' . $produk->gambar) }}';"
+                                         onerror="this.onerror=null;this.src='{{ asset('frontend/assets/img/' . str_replace(' ', '', $produk->gambar)) }}';"
                                          alt="{{ $produk->nama_produk }}" style="height:220px;object-fit:cover;">
                                 @else
                                     <div class="d-flex align-items-center justify-content-center bg-light"

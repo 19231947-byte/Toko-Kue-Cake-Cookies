@@ -97,7 +97,7 @@
             <div class="col-lg-5">
                 @if($produk->gambar)
                     <img class="detail-img" src="{{ asset('storage/' . $produk->gambar) }}" 
-                         onerror="this.onerror=null;this.src='{{ asset('frontend/assets/img/' . $produk->gambar) }}';"
+                         onerror="this.onerror=null;this.src='{{ asset('frontend/assets/img/' . str_replace(' ', '', $produk->gambar)) }}';"
                          alt="{{ $produk->nama_produk }}">
                 @else
                     <div class="img-placeholder">
