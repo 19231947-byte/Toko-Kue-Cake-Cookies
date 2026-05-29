@@ -55,22 +55,9 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="store-item position-relative text-center">
                                 @if($produk->gambar)
-                                    @php
-                                        $imagePath = 'storage/' . $produk->gambar;
-                                        $assetPath = 'frontend/assets/img/' . $produk->gambar;
-                                    @endphp
-                                    @if(file_exists(public_path($imagePath)))
-                                        <img class="img-fluid w-100" src="{{ asset($imagePath) }}"
-                                             alt="{{ $produk->nama_produk }}" style="height:220px;object-fit:cover;">
-                                    @elseif(file_exists(public_path($assetPath)))
-                                        <img class="img-fluid w-100" src="{{ asset($assetPath) }}"
-                                             alt="{{ $produk->nama_produk }}" style="height:220px;object-fit:cover;">
-                                    @else
-                                        <div class="d-flex align-items-center justify-content-center bg-light"
-                                             style="height:220px;">
-                                            <i class="fa fa-birthday-cake fa-3x" style="color:#C9B8A8;"></i>
-                                        </div>
-                                    @endif
+                                    <img class="img-fluid w-100" src="{{ asset('storage/' . $produk->gambar) }}"
+                                         onerror="this.onerror=null;this.src='{{ asset('frontend/assets/img/' . $produk->gambar) }}';"
+                                         alt="{{ $produk->nama_produk }}" style="height:220px;object-fit:cover;">
                                 @else
                                     <div class="d-flex align-items-center justify-content-center bg-light"
                                          style="height:220px;">

@@ -96,19 +96,9 @@
             {{-- Gambar --}}
             <div class="col-lg-5">
                 @if($produk->gambar)
-                    @php
-                        $imagePath = 'storage/' . $produk->gambar;
-                        $assetPath = 'frontend/assets/img/' . $produk->gambar;
-                    @endphp
-                    @if(file_exists(public_path($imagePath)))
-                        <img class="detail-img" src="{{ asset($imagePath) }}" alt="{{ $produk->nama_produk }}">
-                    @elseif(file_exists(public_path($assetPath)))
-                        <img class="detail-img" src="{{ asset($assetPath) }}" alt="{{ $produk->nama_produk }}">
-                    @else
-                        <div class="img-placeholder">
-                            <i class="fa fa-birthday-cake fa-4x" style="color:#C9B8A8;"></i>
-                        </div>
-                    @endif
+                    <img class="detail-img" src="{{ asset('storage/' . $produk->gambar) }}" 
+                         onerror="this.onerror=null;this.src='{{ asset('frontend/assets/img/' . $produk->gambar) }}';"
+                         alt="{{ $produk->nama_produk }}">
                 @else
                     <div class="img-placeholder">
                         <i class="fa fa-birthday-cake fa-4x" style="color:#C9B8A8;"></i>
