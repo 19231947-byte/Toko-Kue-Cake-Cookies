@@ -54,14 +54,14 @@ class DatabaseSeeder extends Seeder
 
         // ── Eid Cookies (tanpa varian) ────────────────────────────────────────
         $eidList = [
-            ['nama_produk' => 'Nastar',         'deskripsi' => 'Kue lembut dengan isian selai nanas manis dan sedikit asam, lumer di mulut dan jadi favorit saat Lebaran.',   'harga' => 70000, 'stok' => 80, 'gambar' => 'nastar.png'],
-            ['nama_produk' => 'Kastengel',       'deskripsi' => 'Kue keju gurih dengan tekstur renyah dan aroma khas keju yang menggugah selera.',                             'harga' => 70000, 'stok' => 30, 'gambar' => 'kastengel.png'],
-            ['nama_produk' => 'Semprit',         'deskripsi' => 'Kue kering klasik berbentuk bunga dengan rasa manis.',                                                        'harga' => 70000, 'stok' => 40, 'gambar' => 'semprit.png'],
-            ['nama_produk' => 'Putri Salju',     'deskripsi' => 'Kue lembut bertabur gula halus yang manis, langsung lumer saat digigit.',                                     'harga' => 70000, 'stok' => 40, 'gambar' => 'putri_salju.png'],
-            ['nama_produk' => 'Sagu Keju',       'deskripsi' => 'Kue ringan dan renyah dengan perpaduan rasa sagu dan keju yang gurih.',                                       'harga' => 70000, 'stok' => 30, 'gambar' => 'sagu_keju.png'],
-            ['nama_produk' => 'Kue Choco Chips', 'deskripsi' => 'Kue renyah dengan taburan cokelat chips yang manis dan disukai banyak orang.',                               'harga' => 70000, 'stok' => 45, 'gambar' => 'choco_chips.png'],
-            ['nama_produk' => 'Kue Cornflakes',  'deskripsi' => 'Kue renyah dengan campuran cornflakes yang gurih manis, cocok untuk camilan Lebaran.',                        'harga' => 70000, 'stok' => 40, 'gambar' => 'cornflakes.png'],
-            ['nama_produk' => 'Kue Kacang',      'deskripsi' => 'Kue tradisional dengan rasa kacang yang gurih dan tekstur yang lembut serta sedikit renyah.',                 'harga' => 65000, 'stok' => 30, 'gambar' => 'kue_kacang.png'],
+            ['nama_produk' => 'Nastar',         'deskripsi' => 'Kue lembut dengan isian selai nanas manis dan sedikit asam, lumer di mulut dan jadi favorit saat Lebaran.',   'harga' => 70000, 'gambar' => 'Nastar.png'],
+            ['nama_produk' => 'Kastengel',       'deskripsi' => 'Kue keju gurih dengan tekstur renyah dan aroma khas keju yang menggugah selera.',                             'harga' => 70000, 'gambar' => 'Kastengel.png'],
+            ['nama_produk' => 'Semprit',         'deskripsi' => 'Kue kering klasik berbentuk bunga dengan rasa manis.',                                                        'harga' => 70000, 'gambar' => 'Semprit.png'],
+            ['nama_produk' => 'Putri Salju',     'deskripsi' => 'Kue lembut bertabur gula halus yang manis, langsung lumer saat digigit.',                                     'harga' => 70000, 'gambar' => 'Putri Salju.png'],
+            ['nama_produk' => 'Sagu Keju',       'deskripsi' => 'Kue ringan dan renyah dengan perpaduan rasa sagu dan keju yang gurih.',                                       'harga' => 70000, 'gambar' => 'Sagu Keju.png'],
+            ['nama_produk' => 'Kue Choco Chips', 'deskripsi' => 'Kue renyah dengan taburan cokelat chips yang manis dan disukai banyak orang.',                                'harga' => 70000, 'gambar' => 'Choco Chips.png'],
+            ['nama_produk' => 'Kue Cornflakes',  'deskripsi' => 'Kue renyah dengan campuran cornflakes yang gurih manis, cocok untuk camilan Lebaran.',                        'harga' => 70000, 'gambar' => 'Cornfleks.png'],
+            ['nama_produk' => 'Kue Kacang',      'deskripsi' => 'Kue tradisional dengan rasa kacang yang gurih dan tekstur yang lembut serta sedikit renyah.',                 'harga' => 65000, 'gambar' => 'Kacang.jpg'],
         ];
 
         foreach ($eidList as $data) {
@@ -75,14 +75,13 @@ class DatabaseSeeder extends Seeder
         ];
 
         $softList = [
-            ['nama_produk' => 'Bolu Cokelat',     'deskripsi' => 'Bolu lembut dengan rasa cokelat yang manis dan nikmat.',                           'harga' => 80000, 'stok' => null, 'gambar' => 'bolu_cokelat.png'],
-            ['nama_produk' => 'Bolu Keju',         'deskripsi' => 'Bolu empuk dengan taburan keju gurih yang lezat.',                                 'harga' => 80000, 'stok' => null, 'gambar' => 'bolu_keju.png'],
-            ['nama_produk' => 'Bolu Marmer',       'deskripsi' => 'Bolu dengan motif marmer cantik, perpaduan rasa vanilla dan cokelat.',             'harga' => 80000, 'stok' => null, 'gambar' => 'bolu_marmer.png'],
-            ['nama_produk' => 'Bolu Pandan',       'deskripsi' => 'Bolu pandan lembut dengan aroma harum khas pandan yang menggugah selera.',         'harga' => 80000, 'stok' => null, 'gambar' => 'bolu_pandan.png'],
-            ['nama_produk' => 'Brownies Cokelat',  'deskripsi' => 'Brownies padat dan lembut dengan rasa cokelat yang rich.',                         'harga' => 80000, 'stok' => null, 'gambar' => 'brownies_cokelat.png'],
-            ['nama_produk' => 'Brownies Kacang',   'deskripsi' => 'Brownies dengan topping kacang yang renyah dan gurih.',                            'harga' => 80000, 'stok' => null, 'gambar' => 'brownies_kacang.png'],
-            ['nama_produk' => 'Brownies Keju',     'deskripsi' => 'Brownies lezat dengan tambahan keju yang gurih dan creamy.',                       'harga' => 80000, 'stok' => null, 'gambar' => 'brownies_keju.png'],
-            ['nama_produk' => 'Brownies Pandan',   'deskripsi' => 'Brownies lembut dengan aroma pandan yang harum dan rasa manis yang khas.',         'harga' => 80000, 'stok' => null, 'gambar' => 'brownies_pandan.png'],
+            ['nama_produk' => 'Bolu Cokelat',     'deskripsi' => 'Bolu lembut dengan rasa cokelat yang manis dan nikmat.',                           'harga' => 80000, 'stok' => null, 'gambar' => 'Bolu Cokelat.png'],
+            ['nama_produk' => 'Bolu Keju',         'deskripsi' => 'Bolu empuk dengan taburan keju gurih yang lezat.',                                 'harga' => 80000, 'stok' => null, 'gambar' => 'Bolu Keju.png'],
+            ['nama_produk' => 'Bolu Marmer',       'deskripsi' => 'Bolu dengan motif marmer cantik, perpaduan rasa vanilla dan cokelat.',             'harga' => 80000, 'stok' => null, 'gambar' => 'Bolu Marmer.png'],
+            ['nama_produk' => 'Bolu Pandan',       'deskripsi' => 'Bolu pandan lembut dengan aroma harum khas pandan yang menggugah selera.',         'harga' => 80000, 'stok' => null, 'gambar' => 'Bolu Pandan.png'],
+            ['nama_produk' => 'Mini Black Forest',  'deskripsi' => 'Perpaduan bolu cokelat lembut, krim creamy, dan serutan cokelat premium yang manis dan lezat di setiap gigitan.',                         'harga' => 80000, 'stok' => null, 'gambar' => 'Mini Black Forest.png'],
+            ['nama_produk' => 'Brownies Kacang',   'deskripsi' => 'Brownies dengan topping kacang yang renyah dan gurih.',                            'harga' => 80000, 'stok' => null, 'gambar' => 'Brownies Kacang.png'],
+            ['nama_produk' => 'Brownies Keju',     'deskripsi' => 'Brownies lezat dengan tambahan keju yang gurih dan creamy.',                       'harga' => 80000, 'stok' => null, 'gambar' => 'Brownies Keju.png'],
         ];
 
         foreach ($softList as $data) {
@@ -100,48 +99,32 @@ class DatabaseSeeder extends Seeder
         ];
 
         $birthdayList = [
-            ['nama_produk' => 'Chocolate Tart', 'deskripsi' => 'Kue ulang tahun lembut dengan krim cokelat manis yang disukai semua usia.',                   'harga' => 150000, 'gambar' => 'chocolate_tart.png'],
-            ['nama_produk' => 'Cheese Tart',    'deskripsi' => 'Kue ulang tahun empuk dengan krim keju gurih dan creamy.',                                     'harga' => 150000, 'gambar' => 'cheese_tart.png'],
-            ['nama_produk' => 'Lavender Tart',  'deskripsi' => 'Kue ulang tahun lembut dengan aroma lavender yang harum dan rasa manis yang elegan.',          'harga' => 150000, 'gambar' => 'lavender_tart.png'],
+            ['nama_produk' => 'Cheese Tart',       'deskripsi' => 'Kue tart dengan rasa keju yang gurih dan tekstur yang lembut di mulut.',           'harga' => 200000, 'stok' => null, 'gambar' => 'Cheese Tart.png'],
+            ['nama_produk' => 'Chocolate Tart',    'deskripsi' => 'Kue tart cokelat premium dengan rasa cokelat yang mendalam dan memanjakan lidah.', 'harga' => 200000, 'stok' => null, 'gambar' => 'Choclate Tart.png'],
+            ['nama_produk' => 'Lavender Tart',     'deskripsi' => 'Kue tart unik dengan sentuhan aroma lavender yang menenangkan dan rasa manis.',   'harga' => 200000, 'stok' => null, 'gambar' => 'Lavender Tart.png'],
         ];
 
         foreach ($birthdayList as $data) {
             $buatProduk(
-                array_merge($data, ['stok' => null, 'kategori_id' => $birthdayCakes->id]),
+                array_merge($data, ['kategori_id' => $birthdayCakes->id]),
                 $varianBirthday
             );
         }
 
-        // ── Snack Box (dengan varian isi) ─────────────────────────────────────
+        // ── Snack Box (tanpa varian) ──────────────────────────────────────────
         $snackList = [
-            [
-                'produk'  => ['nama_produk' => 'Snack Box Mini',    'deskripsi' => 'Paket snack box mini berisi aneka kue kering pilihan, cocok untuk acara kecil.',     'harga' => 50000,  'stok' => 20, 'gambar' => 'snack_box_mini.png'],
-                'varians' => [
-                    ['nama_varian' => '5 Pcs',  'harga' => 50000,  'berat' => 200, 'ukuran' => null],
-                    ['nama_varian' => '10 Pcs', 'harga' => 90000,  'berat' => 400, 'ukuran' => null],
-                ],
-            ],
-            [
-                'produk'  => ['nama_produk' => 'Snack Box Regular', 'deskripsi' => 'Paket snack box reguler dengan pilihan kue kering yang lebih beragam.',              'harga' => 85000,  'stok' => 15, 'gambar' => 'snack_box_regular.png'],
-                'varians' => [
-                    ['nama_varian' => '10 Pcs', 'harga' => 85000,  'berat' => 400, 'ukuran' => null],
-                    ['nama_varian' => '20 Pcs', 'harga' => 150000, 'berat' => 800, 'ukuran' => null],
-                ],
-            ],
-            [
-                'produk'  => ['nama_produk' => 'Snack Box Premium', 'deskripsi' => 'Paket snack box premium dengan kue pilihan berkualitas tinggi untuk acara spesial.', 'harga' => 150000, 'stok' => 10, 'gambar' => 'snack_box_premium.png'],
-                'varians' => [
-                    ['nama_varian' => '15 Pcs', 'harga' => 150000, 'berat' => 600,  'ukuran' => null],
-                    ['nama_varian' => '30 Pcs', 'harga' => 270000, 'berat' => 1200, 'ukuran' => null],
-                ],
-            ],
+            ['nama_produk' => 'Pastel',           'deskripsi' => 'Pastel renyah dengan isian sayuran dan telur yang gurih.',                         'harga' => 5000,  'stok' => 50, 'gambar' => 'Pastel.png'],
+            ['nama_produk' => 'Risol',            'deskripsi' => 'Risol lezat dengan kulit yang renyah dan isian yang melimpah.',                    'harga' => 5000,  'stok' => 50, 'gambar' => 'Risol.png'],
+            ['nama_produk' => 'Dadar Gulung',     'deskripsi' => 'Kue tradisional dengan kulit pandan dan isian unti kelapa manis.',                'harga' => 4000,  'gambar' => 'Dadar Gulung.png'],
+            ['nama_produk' => 'Kue Sus',          'deskripsi' => 'Kue sus lembut dengan isian vla vanilla yang creamy dan manis.',                   'harga' => 5000,  'gambar' => 'Kue Sus Vla Vanila.png'],
+            ['nama_produk' => 'Kue Nagasari',     'deskripsi' => 'Kue tradisional berbahan tepung beras dengan isian pisang yang manis dan lembut.', 'harga' => 4000,  'stok' => 35, 'gambar' => 'Kue Nagasari.png'],
+            ['nama_produk' => 'Donat Meses',      'deskripsi' => 'Donat empuk dengan taburan meses cokelat yang melimpah.',                          'harga' => 5000,  'stok' => 45, 'gambar' => 'Donat Meses&Keju.png'],
+            ['nama_produk' => 'Roti Isi',         'deskripsi' => 'Roti lembut dengan berbagai pilihan isian yang lezat.',                             'harga' => 6000,  'gambar' => 'Roti Isi.png'],
+            ['nama_produk' => 'Pie Buah',         'deskripsi' => 'Pie renyah dengan topping buah segar dan vla manis.',                              'harga' => 6000,  'stok' => 35, 'gambar' => 'Pie Buah.png'],
         ];
 
-        foreach ($snackList as $item) {
-            $buatProduk(
-                array_merge($item['produk'], ['kategori_id' => $snackBox->id]),
-                $item['varians']
-            );
+        foreach ($snackList as $data) {
+            $buatProduk(array_merge($data, ['kategori_id' => $snackBox->id]));
         }
     }
 }

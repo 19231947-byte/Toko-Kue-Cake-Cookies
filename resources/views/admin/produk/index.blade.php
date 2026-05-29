@@ -34,8 +34,19 @@
             <td>{{ $index + 1 }}</td>
             <td>
                 @if($produk->gambar)
-                    <img src="{{ asset('storage/' . $produk->gambar) }}"
-                         style="width:55px;height:55px;object-fit:cover;border-radius:8px;">
+                    @php
+                        $imagePath = 'storage/' . $produk->gambar;
+                        $assetPath = 'frontend/assets/img/' . $produk->gambar;
+                    @endphp
+                    @if(file_exists(public_path($imagePath)))
+                        <img src="{{ asset($imagePath) }}" style="width:55px;height:55px;object-fit:cover;border-radius:8px;">
+                    @elseif(file_exists(public_path($assetPath)))
+                        <img src="{{ asset($assetPath) }}" style="width:55px;height:55px;object-fit:cover;border-radius:8px;">
+                    @else
+                        <div style="width:55px;height:55px;background:#f3f4f6;border-radius:8px;display:flex;align-items:center;justify-content:center;">
+                            <i class="fa fa-image" style="color:#9ca3af;"></i>
+                        </div>
+                    @endif
                 @else
                     <span style="font-size:12px;color:#999;">-</span>
                 @endif
