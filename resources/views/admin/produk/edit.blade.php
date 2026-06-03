@@ -51,9 +51,13 @@
             <label>Gambar Produk</label>
             @if($produk->gambar)
                 @php
-                    $imagePath = str_contains($produk->gambar, 'produk/') 
-                        ? asset('storage/' . $produk->gambar) 
-                        : asset('frontend/assets/img/' . $produk->gambar);
+                    if (str_starts_with($produk->gambar, 'http')) {
+                        $imagePath = $produk->gambar;
+                    } elseif (str_contains($produk->gambar, 'produk/')) {
+                        $imagePath = asset('storage/' . $produk->gambar);
+                    } else {
+                        $imagePath = asset('frontend/assets/img/' . $produk->gambar);
+                    }
                 @endphp
                 <div style="margin-bottom:8px;">
                     <img src="{{ $imagePath }}"

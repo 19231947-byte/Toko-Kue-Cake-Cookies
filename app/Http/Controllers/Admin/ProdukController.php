@@ -9,6 +9,7 @@ use App\Models\ProdukVarian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class ProdukController extends Controller
 {
@@ -43,7 +44,10 @@ class ProdukController extends Controller
         ]);
 
         if ($request->hasFile('gambar')) {
-            $validated['gambar'] = $request->file('gambar')->store('produk', 'public');
+            $uploadedFileUrl = Cloudinary::upload($request->file('gambar')->getRealPath(), [
+                'folder' => 'produk',
+            ])->getSecurePath();
+            $validated['gambar'] = $uploadedFileUrl;
         }
 
         $produk = Produk::create($validated);
@@ -85,9 +89,28 @@ class ProdukController extends Controller
 
         if ($request->hasFile('gambar')) {
             if ($produk->gambar) {
-                Storage::disk('public')->delete($produk->gambar);
+                if (str_contains($produk->gambar, 'cloudinary.com')) {
+                    // Ekstrak public_id dari URL Cloudinary
+                    // Format: .../upload/v12345678/folder/public_id.jpg
+                    $path = parse_url($produk->gambar, PHP_URL_PATH);
+                    $segments = explode('/', $path);
+                    $filename = end($segments);
+                    $publicIdWithFolder = $segments[count($segments) - 2] . '/' . pathinfo($filename, PATHINFO_FILENAME);
+                    
+                    try {
+                        Cloudinary::destroy($publicIdWithFolder);
+                    } catch (\Exception $e) {
+                        // Abaikan jika gagal hapus di cloudinary
+                    }
+                } else {
+                    Storage::disk('public')->delete($produk->gambar);
+                }
             }
-            $validated['gambar'] = $request->file('gambar')->store('produk', 'public');
+            
+            $uploadedFileUrl = Cloudinary::upload($request->file('gambar')->getRealPath(), [
+                'folder' => 'produk',
+            ])->getSecurePath();
+            $validated['gambar'] = $uploadedFileUrl;
         }
 
         // Update data produk (tanpa key varians)
@@ -115,7 +138,20 @@ class ProdukController extends Controller
     public function destroy(Produk $produk)
     {
         if ($produk->gambar) {
-            Storage::disk('public')->delete($produk->gambar);
+            if (str_contains($produk->gambar, 'cloudinary.com')) {
+                $path = parse_url($produk->gambar, PHP_URL_PATH);
+                $segments = explode('/', $path);
+                $filename = end($segments);
+                $publicIdWithFolder = $segments[count($segments) - 2] . '/' . pathinfo($filename, PATHINFO_FILENAME);
+                
+                try {
+                    Cloudinary::destroy($publicIdWithFolder);
+                } catch (\Exception $e) {
+                    // Abaikan
+                }
+            } else {
+                Storage::disk('public')->delete($produk->gambar);
+            }
         }
         $produk->delete(); // varian terhapus otomatis karena cascade
 

@@ -35,9 +35,13 @@
             <td>
                 @if($produk->gambar)
                     @php
-                        $imagePath = str_contains($produk->gambar, 'produk/') 
-                            ? asset('storage/' . $produk->gambar) 
-                            : asset('frontend/assets/img/' . $produk->gambar);
+                        if (str_starts_with($produk->gambar, 'http')) {
+                            $imagePath = $produk->gambar;
+                        } elseif (str_contains($produk->gambar, 'produk/')) {
+                            $imagePath = asset('storage/' . $produk->gambar);
+                        } else {
+                            $imagePath = asset('frontend/assets/img/' . $produk->gambar);
+                        }
                     @endphp
                     <img src="{{ $imagePath }}" 
                          onerror="this.onerror=null;this.src='{{ asset('frontend/assets/img/no-image.png') }}';"
