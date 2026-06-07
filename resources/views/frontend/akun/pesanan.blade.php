@@ -109,7 +109,18 @@
                             @foreach($pesanan->detailPesanans as $detail)
                                 <div class="item-row">
                                     @if($detail->produk && $detail->produk->gambar)
-                                        <img src="{{ asset('storage/' . $detail->produk->gambar) }}"
+                                        @php
+                                            $prodImg = $detail->produk->gambar;
+                                            if (str_starts_with($prodImg, 'http')) {
+                                                $imagePath = $prodImg;
+                                            } elseif (str_contains($prodImg, 'produk/')) {
+                                                $imagePath = asset('storage/' . $prodImg);
+                                            } else {
+                                                $imagePath = asset('frontend/assets/img/' . $prodImg);
+                                            }
+                                        @endphp
+                                        <img src="{{ $imagePath }}"
+                                             onerror="this.onerror=null;this.src='{{ asset('frontend/assets/img/no-image.png') }}';"
                                              class="item-img" alt="{{ $detail->produk->nama_produk }}">
                                     @else
                                         <div class="item-img-placeholder">

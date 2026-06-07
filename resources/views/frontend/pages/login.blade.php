@@ -52,16 +52,17 @@
         margin-bottom: 14px;
     }
     .password-wrap .auth-field { margin-bottom: 0; }
-    .forgot-link {
+    .toggle-password {
         position: absolute;
         right: 18px;
         top: 50%;
         transform: translateY(-50%);
-        font-size: .82rem;
+        font-size: 1rem;
         color: #8B5E3C;
         text-decoration: none;
+        cursor: pointer;
     }
-    .forgot-link:hover { text-decoration: underline; }
+    .toggle-password:hover { color: #2C1A0E; }
     .btn-auth {
         width: 100%;
         background: #C9B8A8;
@@ -128,7 +129,9 @@
                     placeholder="Password"
                     required
                 >
-                <a href="#" class="forgot-link" onclick="togglePass(event)">Lupa password?</a>
+                <a href="#" class="toggle-password" onclick="togglePass(event, 'password', 'eye-icon')">
+                    <i class="fa fa-eye" id="eye-icon"></i>
+                </a>
             </div>
             <button type="submit" class="btn-auth">LOGIN</button>
         </form>
@@ -142,10 +145,19 @@
 
 @section('scripts')
 <script>
-    function togglePass(e) {
+    function togglePass(e, inputId, iconId) {
         e.preventDefault();
-        const input = document.getElementById('password');
-        input.type = input.type === 'password' ? 'text' : 'password';
+        const input = document.getElementById(inputId);
+        const icon = document.getElementById(iconId);
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
     }
 </script>
 @endsection

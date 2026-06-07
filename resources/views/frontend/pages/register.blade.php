@@ -47,6 +47,22 @@
     }
     .auth-field:focus { border-color: #8B5E3C; }
     .auth-field::placeholder { color: #b0a090; }
+    .password-wrap {
+        position: relative;
+        margin-bottom: 14px;
+    }
+    .password-wrap .auth-field { margin-bottom: 0; }
+    .toggle-password {
+        position: absolute;
+        right: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1rem;
+        color: #8B5E3C;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    .toggle-password:hover { color: #2C1A0E; }
     .btn-auth {
         width: 100%;
         background: #C9B8A8;
@@ -82,6 +98,23 @@
     }
     .alert-error ul { margin: 0; padding-left: 16px; }
 </style>
+@section('scripts')
+<script>
+    function togglePass(e, inputId, iconId) {
+        e.preventDefault();
+        const input = document.getElementById(inputId);
+        const icon = document.getElementById(iconId);
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    }
+</script>
 @endsection
 
 @section('content')
@@ -119,21 +152,32 @@
                 value="{{ old('email') }}"
                 required
             >
-            <input
-                type="password"
-                name="password"
-                id="password"
-                class="auth-field"
-                placeholder="Password"
-                required
-            >
-            <input
-                type="password"
-                name="password_confirmation"
-                class="auth-field"
-                placeholder="Konfirmasi Password"
-                required
-            >
+            <div class="password-wrap">
+                <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    class="auth-field"
+                    placeholder="Password"
+                    required
+                >
+                <a href="#" class="toggle-password" onclick="togglePass(event, 'password', 'eye-pass')">
+                    <i class="fa fa-eye" id="eye-pass"></i>
+                </a>
+            </div>
+            <div class="password-wrap" style="margin-top:14px;">
+                <input
+                    type="password"
+                    name="password_confirmation"
+                    id="password_confirmation"
+                    class="auth-field"
+                    placeholder="Konfirmasi Password"
+                    required
+                >
+                <a href="#" class="toggle-password" onclick="togglePass(event, 'password_confirmation', 'eye-conf')">
+                    <i class="fa fa-eye" id="eye-conf"></i>
+                </a>
+            </div>
             <button type="submit" class="btn-auth">CREATE ACCOUNT</button>
         </form>
 

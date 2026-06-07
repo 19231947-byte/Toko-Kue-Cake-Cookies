@@ -55,10 +55,12 @@
             <a href="{{ route('admin.pesanan.index') }}" class="{{ request()->routeIs('admin.pesanan.*') ? 'active' : '' }}"><i class="fa-solid fa-box"></i> Pesanan</a>
             <a href="{{ route('admin.laporan.index') }}" class="{{ request()->routeIs('admin.laporan.*') ? 'active' : '' }}"><i class="fa-solid fa-file-lines"></i> Laporan Penjualan</a>
             <a href="{{ route('admin.pesan-kontak.index') }}" class="{{ request()->routeIs('admin.pesan-kontak.*') ? 'active' : '' }}"><i class="fa-solid fa-envelope"></i> Pesan Masuk</a>
+            {{-- 
             <a href="{{ route('admin.kriteria.index') }}" class="{{ request()->routeIs('admin.kriteria.*') ? 'active' : '' }}"><i class="fa-solid fa-sliders"></i> Data Kriteria</a>
             <a href="{{ route('admin.alternatif.index') }}" class="{{ request()->routeIs('admin.alternatif.*') ? 'active' : '' }}"><i class="fa-solid fa-list-ul"></i> Data Alternatif</a>
             <a href="{{ route('admin.perhitungan.index') }}" class="{{ request()->routeIs('admin.perhitungan.index') ? 'active' : '' }}"><i class="fa-solid fa-calculator"></i> Perhitungan SMART</a>
             <a href="{{ route('admin.perhitungan.hasil') }}" class="{{ request()->routeIs('admin.perhitungan.hasil') ? 'active' : '' }}"><i class="fa-solid fa-trophy"></i> Hasil Akhir</a>
+            --}}
         </nav>
     </aside>
 

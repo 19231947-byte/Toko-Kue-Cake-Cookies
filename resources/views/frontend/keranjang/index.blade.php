@@ -75,7 +75,18 @@
                                 <td>
                                     <div class="d-flex align-items-center gap-3">
                                         @if($item['gambar'])
-                                            <img src="{{ asset('storage/' . $item['gambar']) }}"
+                                            @php
+                                                $prodImg = $item['gambar'];
+                                                if (str_starts_with($prodImg, 'http')) {
+                                                    $imagePath = $prodImg;
+                                                } elseif (str_contains($prodImg, 'produk/')) {
+                                                    $imagePath = asset('storage/' . $prodImg);
+                                                } else {
+                                                    $imagePath = asset('frontend/assets/img/' . $prodImg);
+                                                }
+                                            @endphp
+                                            <img src="{{ $imagePath }}"
+                                                 onerror="this.onerror=null;this.src='{{ asset('frontend/assets/img/no-image.png') }}';"
                                                  class="produk-img" alt="{{ $item['nama'] }}">
                                         @else
                                             <div class="produk-img d-flex align-items-center justify-content-center"

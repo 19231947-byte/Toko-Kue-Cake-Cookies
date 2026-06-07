@@ -83,6 +83,7 @@
         </div>
     </div>
 
+    {{-- 
     <div class="dash-card">
         <div class="dash-icon" style="background:#ffedd5;">
             <i class="fa-solid fa-sliders" style="color:#ea580c;"></i>
@@ -102,5 +103,6 @@
             <div class="value">{{ $totalAlternatif }}</div>
         </div>
     </div>
+    --}}
 </div>
 @endsection
