@@ -31,7 +31,7 @@ class PesananController extends Controller
 
         $pesanan->update(array_filter($validated));
 
-        return redirect()->route('admin.pesanan.show', $pesanan)
+        return redirect()->route('admin.pesanan.index')
             ->with('success', 'Status pesanan berhasil diperbarui.');
     }
 }
